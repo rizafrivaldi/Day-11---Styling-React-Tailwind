@@ -20,7 +20,7 @@ export default function Navbar() {
         <div className="flex items-center space-x-2">
           <span className="text-2xl font-bold text-primary">☁</span>
           <span className="text-lg font-semibold text-gray-800 dark:text-gray-100">
-            RivDev
+            Dolor
           </span>
         </div>
 
