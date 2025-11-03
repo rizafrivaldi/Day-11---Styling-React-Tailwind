@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa";
+import { useState } from "react";
 
 export default function Contact() {
   const containerVariants = {
@@ -15,6 +16,8 @@ export default function Contact() {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 },
   };
+
+  const [sent, setSent] = useState(false);
 
   return (
     <motion.section
@@ -40,7 +43,11 @@ export default function Contact() {
       <motion.form
         variants={childVariants}
         className="max-w-lg mx-auto bg-gray-800 p-8 rounded-2xl shadow-lg space-y-4"
-        onSubmit={(e) => e.preventDefault()}
+        onSubmit={(e) => {
+          e.preventDefault();
+          setSent(true);
+          setTimeout(() => setSent(false), 3000);
+        }}
       >
         <input
           type="text"
@@ -58,12 +65,22 @@ export default function Contact() {
           className="w-full p-3 rounded-md bg-gray-700 focus:ring-indigo-500 outline-none"
         ></textarea>
 
-        <button
+        <motion.button
           type="submit"
-          className="w-full p-3 rounded-md bg-gray-700 focus:ring-indigo-500 outline-none"
+          whileTap={{ scale: 0.95 }}
+          className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 rounded-lg font-semibold transition"
         >
           Send Message
-        </button>
+        </motion.button>
+        {sent && (
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-green-400 text-sm mt-2"
+          >
+            Message sent succesfully (demo only)
+          </motion.p>
+        )}
       </motion.form>
 
       {/* Social Links */}
@@ -71,6 +88,27 @@ export default function Contact() {
         className="flex justify-center gap-6 mt-10 text-2xl"
         variants={childVariants}
       >
+        {[
+          { href: "https://github.com", icon: <FaGithub /> },
+          { href: "https://linkedin.com", icon: <FaLinkedin /> },
+          { href: "mailto:rizafrivaldi@gmail.com", icon: <FaEnvelope /> },
+        ].map(({ href, icon }, index) => (
+          <motion.a
+            key={index}
+            href={href}
+            whileHover={{
+              scale: 1.2,
+              color: "#6366f1",
+              textShadow: "0px 0px 8px #6366f1",
+            }} // Glow Effect
+            transition={{ type: "spring", stiffness: 300 }}
+            className="transition"
+          >
+            {icon}
+          </motion.a>
+        ))}
+      </motion.div>
+      {/*
         <a
           href="https://github.com"
           className="hover:text-indigo-400 transition"
@@ -88,8 +126,7 @@ export default function Contact() {
           className="hover:text-indigo-400 transition"
         >
           <FaEnvelope />
-        </a>
-      </motion.div>
+        </a> */}
     </motion.section>
   );
 }
