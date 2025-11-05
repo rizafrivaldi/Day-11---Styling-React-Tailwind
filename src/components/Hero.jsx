@@ -21,14 +21,22 @@ export default function Hero() {
 
   return (
     <motion.section
-      className="relative min-h-[80vh] flex flex-col justify-center items-center text-center px-6 text-white bg-cover bg-center bg-no-repeat"
+      className="relative min-h-[80vh] flex flex-col justify-center items-center text-center px-6 text-white bg-cover bg-center bg-no-repeat rounded-3xl overflow-hidden mx-6 md:mx-12 shadow-lg transition-all duration-500 bg-gray-100 dark:bg-gray-900 mt-[5rem] md:mt-[7rem]"
       style={{
-        backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.8)), url('/src/assets/hero-bg.jpg')`,
+        backgroundImage: `linear-gradient(
+        ${
+          document.documentElement.classList.contains("dark")
+            ? "rgba(0,0,0,0.6), rgba(0,0,0,0.8)"
+            : "rgba(255,255,255,0.6), rgba(255,255,255,0.3)"
+        }),
+        url('/src/assets/hero-bg1.jpg')`,
+        backgroundBlendMode: "",
       }}
       variants={containerVariants}
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, ease: "easeOut" }}
+      whileHover={{ scale: 1.02 }}
+      transition={{ duration: 0.6, ease: "easeOut" }}
     >
       <div className="absolute inset-0 bg-black/50"></div>{" "}
       <div className="max-w-3xl">

@@ -41,7 +41,7 @@ export default function About() {
       </motion.h2>
 
       <motion.p
-        clasName="text-gray-300 text-lg max-w-2xl mx-auto mb-8"
+        className="text-gray-300 text-lg max-w-2xl mx-auto mb-8"
         variants={childVariants}
       >
         I am a Mageran Full Stack Developer specializing in building beautiful,
